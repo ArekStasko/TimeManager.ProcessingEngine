@@ -2,6 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using TimeManager.ProcessingEngine.Data;
 
+/*
+ 
+-- IMPORTANT NOTE --
+To make migration initialization works successfully these packages 
+must have the same versions : 
+
+Microsoft.EntityFrameworkCore
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.SqlServer
+
+*/
+
 namespace TimeManager.DATA.Data.Services
 {
     public static class DatabaseManagerService

@@ -6,6 +6,7 @@ namespace TimeManager.ProcessingEngine.Data
     {
         public DataContext() { }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
+        public DbSet<ActivitySet> activitySet { get; set; }
+        public DbSet<UserSet> userSet { get; set; }
     }
 }
