@@ -15,7 +15,7 @@ Microsoft.EntityFrameworkCore.SqlServer
 
 */
 
-namespace TimeManager.DATA.Data.Services
+namespace TimeManager.ProcessingEngine.Data.Services
 {
     public static class DatabaseManagerService
     {

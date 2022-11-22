@@ -14,36 +14,13 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
             _objectPool = new DefaultObjectPool<IModel>(objectPolicy, Environment.ProcessorCount * 2);
         }
 
-        public void Publish<T>(T message, string exchangeName, string exchangeType, string routeKey) where T : class
-        {
-            if (message == null) return;
-
+       public void Consume()
+       {
             var channel = _objectPool.Get();
+            MessageReceiver messageReceiver = new MessageReceiver(channel);
+            string[] queues = new string[] { "entity.activity.post-queue", "entity.activity.delete-queue", "entity.activity.update-queue" };
 
-            try
-            {
-                channel.ExchangeDeclare(exchangeName, exchangeType, true, false, null);
-                var sendBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-
-                var properties = channel.CreateBasicProperties();
-                properties.Persistent = true;
-
-                channel.BasicPublish(
-                    exchangeName,
-                    routeKey,
-                    properties,
-                    sendBytes
-                    );
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                _objectPool.Return(channel);
-            }
+            foreach(var queue in queues) channel.BasicConsume(queue, false, messageReceiver);
         }
     }
 }

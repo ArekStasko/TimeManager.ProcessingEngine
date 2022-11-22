@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TimeManager.ProcessingEngine.Data;
-using TimeManager.DATA.Data.Services;
+using TimeManager.ProcessingEngine.Data.Services;
+using TimeManager.ProcessingEngine.Services.MessageBroker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
+var mqManager = new MQManager(new MQModelPooledObjectPolicy());
+mqManager.Consume();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -43,7 +44,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 app.UseHttpsRedirection();
 
