@@ -14,8 +14,10 @@ namespace TimeManager.ProcessingEngine.Processors
 
         public void Execute(string body)
         {
+            Console.WriteLine("EXECUTE HIT");
             try
             {
+                Console.WriteLine("START EXECUTE");
                 ActivityDTO activityDTO = JsonConvert.DeserializeObject<ActivityDTO>(body);
                 ActivitySet activitySet = new ActivitySet()
                 {
@@ -25,9 +27,12 @@ namespace TimeManager.ProcessingEngine.Processors
                 };
                 _context.activitySet.Add(activitySet);
                 _context.SaveChanges();
+                Console.WriteLine("SUCCESS EXECUTE");
             }
             catch (Exception ex)
             {
+                Console.WriteLine("FAILURE EXECUTE");
+                Console.WriteLine(ex.Message);
                 throw ex;
             }
         }
