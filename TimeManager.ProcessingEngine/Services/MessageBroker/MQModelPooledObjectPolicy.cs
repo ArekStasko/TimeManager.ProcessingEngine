@@ -9,6 +9,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
 
         public MQModelPooledObjectPolicy() => _connection = GetConnection();
 
+
         private IConnection GetConnection()
         {
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
