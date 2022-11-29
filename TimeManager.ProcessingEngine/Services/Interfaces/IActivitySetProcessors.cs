@@ -2,8 +2,8 @@
 {
     public interface IActivitySetProcessors
     {
-        public void Delete(string body);
-        public void Update(string body);
-        public void Post(string body);
+        public void Activity_Delete(string body);
+        public void Activity_Update(string body);
+        public void Activity_Post(string body);
     }
 }

@@ -21,7 +21,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
             MessageReceiver messageReceiver = new MessageReceiver(channel, processors);
             string[] queues = new string[] { "entity.activity.post-queue", "entity.activity.delete-queue", "entity.activity.update-queue" };
 
-            foreach(var queue in queues) channel.BasicConsume(queue, false, messageReceiver);
+            foreach (var queue in queues) channel.BasicConsume(queue, false, messageReceiver);
         }
     }
 }

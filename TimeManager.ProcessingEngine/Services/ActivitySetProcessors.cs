@@ -8,19 +8,19 @@ namespace TimeManager.ProcessingEngine.Services
         private readonly DataContext _context;
         public ActivitySetProcessors(DataContext context) => _context = context;
 
-        public void Delete(string body)
+        public void Activity_Delete(string body)
         {
             IProcessor processor = new Activity_Delete(_context);
             processor.Execute(body);
         }
 
-        public void Post(string body)
+        public void Activity_Post(string body)
         {
             IProcessor processor = new Activity_Post(_context);
             processor.Execute(body);
         }
 
-        public void Update(string body)
+        public void Activity_Update(string body)
         {
             IProcessor processor = new Activity_Update(_context);
             processor.Execute(body);
