@@ -17,6 +17,7 @@ namespace TimeManager.ProcessingEngine.Processors
             try
             {
                 ActivityDTO activityDTO = JsonConvert.DeserializeObject<ActivityDTO>(body);
+
                 ActivitySet activitySet = new ActivitySet()
                 {
                     ActivityId = activityDTO.Id,

@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using RabbitMQ.Client;
 using TimeManager.ProcessingEngine.Data;
 using TimeManager.ProcessingEngine.Processors;
@@ -22,11 +23,15 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
         {
             try
             {
-                    string convertedBody = Encoding.UTF8.GetString(body.ToArray());
-                //IProcessor processor = (IProcessor)assem.CreateInstance($"TimeManager.ProcessingEngine.Processors.{routingKey}");
-                //processor.Execute(convertedBody);
-                _processors.Activity_Post(convertedBody);
+                var jsonBody = JObject.Parse(Encoding.UTF8.GetString(body.ToArray()));
+                string? convertedBody = jsonBody["Result"]["Value"].ToString();
 
+                if (convertedBody == null) throw new Exception("Message Body has wrong format");
+
+                MethodInfo? processorCall = _processors.GetType().GetMethod(routingKey);
+                if (processorCall == null) throw new Exception("Processor call error");
+
+                processorCall.Invoke(_processors, new object[] { convertedBody });
             }
             catch (Exception ex)
             {
