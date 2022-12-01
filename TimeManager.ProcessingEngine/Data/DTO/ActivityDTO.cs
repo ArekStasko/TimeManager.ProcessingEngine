@@ -1,7 +1,10 @@
-﻿namespace TimeManager.ProcessingEngine.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TimeManager.ProcessingEngine.Data
 {
     public class ActivityDTO
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

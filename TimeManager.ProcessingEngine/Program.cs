@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.ObjectPool;
+using RabbitMQ.Client;
 using Serilog;
 using TimeManager.ProcessingEngine.Data;
 using TimeManager.ProcessingEngine.Data.Services;
@@ -27,14 +29,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<DataContext>(s => new DataContext(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSingleton<IActivitySetProcessors, ActivitySetProcessors>();
+builder.Services.AddSingleton<IPooledObjectPolicy<IModel>, MQModelPooledObjectPolicy>();
 
-var mqManager = new MQManager(new MQModelPooledObjectPolicy());
+builder.Services.AddHostedService<MQManager>();
+
 
 
 var app = builder.Build();
 
 DatabaseManagerService.MigrationInitialization(app);
-mqManager.Consume(app.Services.GetService<IActivitySetProcessors>());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

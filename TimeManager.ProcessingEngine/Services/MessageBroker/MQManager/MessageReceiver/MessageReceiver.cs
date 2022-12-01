@@ -11,11 +11,11 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
     public class MessageReceiver : DefaultBasicConsumer
     {
         private readonly IModel _channel;
-        private readonly Type _processors;
+        private readonly IActivitySetProcessors _processors;
         public MessageReceiver(IModel channel, IActivitySetProcessors processors)
         {
             _channel = channel;
-            _processors = (Type)processors;
+            _processors = processors;
         } 
 
         public override void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, ReadOnlyMemory<byte> body)
@@ -23,9 +23,9 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
             try
             {
                     string convertedBody = Encoding.UTF8.GetString(body.ToArray());
-                    Assembly assem = Assembly.GetExecutingAssembly();
                 //IProcessor processor = (IProcessor)assem.CreateInstance($"TimeManager.ProcessingEngine.Processors.{routingKey}");
                 //processor.Execute(convertedBody);
+                _processors.Activity_Post(convertedBody);
 
             }
             catch (Exception ex)
