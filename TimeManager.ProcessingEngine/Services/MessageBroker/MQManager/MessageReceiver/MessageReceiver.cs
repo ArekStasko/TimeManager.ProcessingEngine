@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
+using LanguageExt.Common;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using RabbitMQ.Client;
 using TimeManager.ProcessingEngine.Data;
 using TimeManager.ProcessingEngine.Processors;
+using TimeManager.ProcessingEngine.Services.container;
 
 namespace TimeManager.ProcessingEngine.Services.MessageBroker
 {
     public class MessageReceiver : DefaultBasicConsumer
     {
         private readonly IModel _channel;
-        private readonly IActivitySetProcessors _processors;
-        public MessageReceiver(IModel channel, IActivitySetProcessors processors)
+        private readonly IProcessors _processors;
+        public MessageReceiver(IModel channel, IProcessors processors)
         {
             _channel = channel;
             _processors = processors;
@@ -28,15 +30,25 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
 
                 if (convertedBody == null) throw new Exception("Message Body has wrong format");
 
-                MethodInfo? processorCall = _processors.GetType().GetMethod(routingKey);
-                if (processorCall == null) throw new Exception("Processor call error");
-
-                processorCall.Invoke(_processors, new object[] { convertedBody });
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw ex;
+                Result<bool> result;
+                switch(routingKey)
+                {
+                    case "task_Post":
+                        {
+                            result = _processors.task_Post.Execute(convertedBody);
+                            break;
+                        }
+                    case "task_Update":
+                        {
+                            result = _processors.task_Update.Execute(convertedBody);
+                            break;
+                        }
+                    case "task_Delete":
+                        {
+                            result = _processors.task_Delete.Execute(convertedBody);
+                            break;
+                        }
+                }
             }
             finally
             {

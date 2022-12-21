@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
+using LanguageExt.Common;
 
 namespace TimeManager.ProcessingEngine.Processors
 {
-    public class Activity_Delete : IProcessor
+    public class Task_Delete : Processor<ITask_Delete>, ITask_Delete
     {
         private DataContext _context;
 
-        public Activity_Delete(DataContext context)
+        public Task_Delete(DataContext context)
         {
             _context = context;
         }
 
-        public void Execute(string body)
+        public Result<bool> Execute(string body)
         {
             try
             {
@@ -21,10 +22,12 @@ namespace TimeManager.ProcessingEngine.Processors
                 var activitySet = _context.activitySet.Single(act => act.ActivityId == activityDTO.Id);
                 _context.activitySet.Remove(activitySet);
                 _context.SaveChanges();
+
+                return new Result<bool>(true);
             }
             catch (Exception ex)
             {
-                throw ex;
+                return new Result<bool>(ex);
             }
         }
     }

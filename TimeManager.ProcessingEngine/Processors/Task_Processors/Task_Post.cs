@@ -1,24 +1,23 @@
 ﻿using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
+using LanguageExt.Common;
 
 namespace TimeManager.ProcessingEngine.Processors
 {
-    public class Activity_Update : IProcessor
+    public class Task_Post : Processor<ITask_Post>, ITask_Post
     {
         private DataContext _context;
 
-        public Activity_Update(DataContext context)
+        public Task_Post(DataContext context)
         {
             _context = context;
         }
 
-        public void Execute(string body)
+        public Result<bool> Execute(string body)
         {
             try
             {
                 ActivityDTO activityDTO = JsonConvert.DeserializeObject<ActivityDTO>(body);
-                var actSet = _context.activitySet.Single(act => act.ActivityId == activityDTO.Id);
-                _context.activitySet.Remove(actSet);
 
                 ActivitySet activitySet = new ActivitySet()
                 {
@@ -29,10 +28,12 @@ namespace TimeManager.ProcessingEngine.Processors
                 _context.activitySet.Add(activitySet);
                 _context.SaveChanges();
 
+                return new Result<bool>(true);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                return new Result<bool>(ex);
             }
         }
     }
