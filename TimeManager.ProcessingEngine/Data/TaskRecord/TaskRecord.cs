@@ -2,11 +2,11 @@
 
 namespace TimeManager.ProcessingEngine.Data
 {
-    public class ActivitySet : IActivitySet
+    public class TaskRecord : ITaskRecord
     {
         [Key]
         public int Id { get; set; }
-        public int ActivityId { get; set; }
+        public int TaskId { get; set; }
         public int UserId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; } 

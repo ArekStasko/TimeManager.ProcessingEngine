@@ -18,9 +18,9 @@ namespace TimeManager.ProcessingEngine.Processors
         {
             try
             {
-                ActivityDTO activityDTO = JsonConvert.DeserializeObject<ActivityDTO>(body);
-                var activitySet = _context.activitySet.Single(act => act.ActivityId == activityDTO.Id);
-                _context.activitySet.Remove(activitySet);
+                TaskDTO activityDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
+                var activitySet = _context.TaskRecords.Single(act => act.TaskId == activityDTO.Id);
+                _context.TaskRecords.Remove(activitySet);
                 _context.SaveChanges();
 
                 return new Result<bool>(true);

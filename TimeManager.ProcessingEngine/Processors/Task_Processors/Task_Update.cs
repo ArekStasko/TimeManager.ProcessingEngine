@@ -17,17 +17,17 @@ namespace TimeManager.ProcessingEngine.Processors
         {
             try
             {
-                ActivityDTO activityDTO = JsonConvert.DeserializeObject<ActivityDTO>(body);
-                var actSet = _context.activitySet.Single(act => act.ActivityId == activityDTO.Id);
-                _context.activitySet.Remove(actSet);
+                TaskDTO activityDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
+                var actSet = _context.TaskRecords.Single(act => act.TaskId == activityDTO.Id);
+                _context.TaskRecords.Remove(actSet);
 
-                ActivitySet activitySet = new ActivitySet()
+                TaskRecord activitySet = new TaskRecord()
                 {
-                    ActivityId = activityDTO.Id,
+                    TaskId = activityDTO.Id,
                     UserId = activityDTO.UserId,
                     StartDate = activityDTO.DateAdded
                 };
-                _context.activitySet.Add(activitySet);
+                _context.TaskRecords.Add(activitySet);
                 _context.SaveChanges();
 
                 return new Result<bool>(true);

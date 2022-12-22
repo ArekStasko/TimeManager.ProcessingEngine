@@ -52,6 +52,22 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
                     _ => new Result<bool>(new Exception("Unexisting Routing Key"))
                 };
 
+                var props = ea.BasicProperties;
+                var replyProps = channel.CreateBasicProperties();
+                replyProps.CorrelationId = props.CorrelationId;
+
+                bool response = result.Match(success =>
+                {
+                    return response = success;
+                }, exception =>
+                {
+                    return response = false;
+                });
+
+                var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
+
+                channel.BasicPublish(exchange: "", routingKey: props.ReplyTo, basicProperties: replyProps, body: responseBytes);
+                channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
             };
         }
 
