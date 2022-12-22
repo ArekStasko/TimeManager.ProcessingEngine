@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 using System.Text;
 using TimeManager.ProcessingEngine.Data;
 using TimeManager.ProcessingEngine.Services.container;
+using RabbitMQ.Client.Events;
+using LanguageExt.Common;
+using Newtonsoft.Json.Linq;
 
 namespace TimeManager.ProcessingEngine.Services.MessageBroker
 {
@@ -18,14 +21,38 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
             _processors = processors;
         } 
         
+        private string ConvertBody(ReadOnlyMemory<byte> body)
+        {
+            var jsonBody = JObject.Parse(Encoding.UTF8.GetString(body.ToArray()));
+            string? convertedBody = jsonBody["Result"]["Value"].ToString();
+
+            if (convertedBody == null) throw new Exception("Message Body has wrong format");
+            return convertedBody;
+        }
+
 
        public void Consume()
        {
             var channel = _objectPool.Get();
-            MessageReceiver messageReceiver = new MessageReceiver(channel, _processors);
             string[] queues = new string[] { "entity.task.post-queue", "entity.task.delete-queue", "entity.task.update-queue" };
 
-            foreach (var queue in queues) channel.BasicConsume(queue, false, messageReceiver);
+            var consumer = new EventingBasicConsumer(channel);
+
+            foreach (var queue in queues) channel.BasicConsume(queue, false, consumer);
+
+            consumer.Received += (model, ea) =>
+            {
+                string body = ConvertBody(ea.Body);
+                
+                Result<bool> result = ea.RoutingKey switch
+                {
+                    "task_Post" => _processors.task_Post.Execute(body),
+                    "task_Update" => _processors.task_Update.Execute(body),
+                    "task_Delete" => _processors.task_Delete.Execute(body),
+                    _ => new Result<bool>(new Exception("Unexisting Routing Key"))
+                };
+
+            };
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
