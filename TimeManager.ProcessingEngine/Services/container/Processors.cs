@@ -1,11 +1,14 @@
 ﻿using Autofac;
+using TimeManager.ProcessingEngine.Data;
 using TimeManager.ProcessingEngine.Processors;
 
 namespace TimeManager.ProcessingEngine.Services.container
 {
     public class Processors : IProcessors
     {
-        private IContainer _container { get; } = ContainerConfig.CreateProcessorsContainer();
+        public Processors(DataContext context) => _container  = ContainerConfig.CreateProcessorsContainer(context);
+
+        private IContainer _container { get; } 
 
         public ITask_Delete task_Delete { get => _container.Resolve<ITask_Delete>(); }
         public ITask_Post task_Post { get => _container.Resolve<ITask_Post>(); }

@@ -17,15 +17,15 @@ namespace TimeManager.ProcessingEngine.Processors
         {
             try
             {
-                TaskDTO activityDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
+                TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
 
-                TaskRecord activitySet = new TaskRecord()
+                TaskRecord taskRecord = new TaskRecord()
                 {
-                    TaskId = activityDTO.Id,
-                    UserId = activityDTO.UserId,
-                    StartDate = activityDTO.DateAdded
+                    TaskId = taskDTO.Id,
+                    UserId = taskDTO.UserId,
+                    StartDate = taskDTO.DateAdded
                 };
-                _context.TaskRecords.Add(activitySet);
+                _context.TaskRecords.Add(taskRecord);
                 _context.SaveChanges();
 
                 return new Result<bool>(true);
