@@ -21,16 +21,6 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
             _processors = processors;
         } 
         
-        private string ConvertBody(ReadOnlyMemory<byte> body)
-        {
-            var jsonBody = JObject.Parse(Encoding.UTF8.GetString(body.ToArray()));
-            string? convertedBody = jsonBody.ToString();
-
-            if (convertedBody == null) throw new Exception("Message Body has wrong format");
-            return convertedBody;
-        }
-
-
        public void Consume()
        {
             var channel = _objectPool.Get();
@@ -41,14 +31,14 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
 
             consumer.Received += (model, ea) =>
             {
-
-                    string body = ConvertBody(ea.Body);
+                var jsonBody = JObject.Parse(Encoding.UTF8.GetString(ea.Body.ToArray()));
+                string? convertedBody = jsonBody.ToString();
 
                 Result<bool> result = ea.RoutingKey switch
                     {
-                        "task_Post" => _processors.task_Post.Execute(body),
-                        "task_Update" => _processors.task_Update.Execute(body),
-                        "task_Delete" => _processors.task_Delete.Execute(body),
+                        "task_Post" => _processors.task_Post.Execute(convertedBody),
+                        "task_Update" => _processors.task_Update.Execute(convertedBody),
+                        "task_Delete" => _processors.task_Delete.Execute(convertedBody),
                         _ => new Result<bool>(new Exception("Unexisting Routing Key"))
                     };
 
