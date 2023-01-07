@@ -14,7 +14,7 @@ namespace TimeManager.ProcessingEngine.Processors
             try
             {
                 TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
-                var taskRecord = _context.TaskRecords.Single(act => act.TaskId == taskDTO.Id);
+                var taskRecord = _context.TaskRecords.Single(tsk => tsk.TaskId == taskDTO.Id && tsk.UserId == taskDTO.UserId);
                 _context.TaskRecords.Remove(taskRecord);
                 _context.SaveChanges();
 
