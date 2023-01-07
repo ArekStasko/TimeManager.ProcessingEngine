@@ -6,7 +6,7 @@ namespace TimeManager.ProcessingEngine.Services.container
 {
     public class Processors : IProcessors
     {
-        public Processors(DataContext context) => _container  = ContainerConfig.CreateProcessorsContainer(context);
+        public Processors(DataContext context, ILogger<Processor> logger) => _container  = ContainerConfig.CreateProcessorsContainer(context, logger);
 
         private IContainer _container { get; } 
 

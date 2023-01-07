@@ -5,22 +5,17 @@ using LanguageExt.Common;
 
 namespace TimeManager.ProcessingEngine.Processors
 {
-    public class Task_Delete : Processor<ITask_Delete>, ITask_Delete
+    public class Task_Delete : Processor, ITask_Delete
     {
-        private DataContext _context;
-
-        public Task_Delete(DataContext context)
-        {
-            _context = context;
-        }
+        public Task_Delete(DataContext context, ILogger<Processor> logger) : base(context, logger) { }
 
         public Result<bool> Execute(string body)
         {
             try
             {
-                TaskDTO activityDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
-                var activitySet = _context.TaskRecords.Single(act => act.TaskId == activityDTO.Id);
-                _context.TaskRecords.Remove(activitySet);
+                TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
+                var taskRecord = _context.TaskRecords.Single(act => act.TaskId == taskDTO.Id);
+                _context.TaskRecords.Remove(taskRecord);
                 _context.SaveChanges();
 
                 return new Result<bool>(true);

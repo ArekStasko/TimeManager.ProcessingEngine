@@ -1,6 +1,6 @@
 ﻿using LanguageExt.Common;
 
-namespace TimeManager.ProcessingEngine.Processors.TaskSet_Processors.Interfaces
+namespace TimeManager.ProcessingEngine.Processors
 {
     public interface ITaskSet_Post
     {

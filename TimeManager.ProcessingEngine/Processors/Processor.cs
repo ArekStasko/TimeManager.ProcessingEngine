@@ -2,12 +2,12 @@
 
 namespace TimeManager.ProcessingEngine.Processors
 {
-    public class Processor<T>
+    public class Processor
     {
         protected DataContext _context { get; set; }
-        protected ILogger<T> _logger { get; set; }
+        protected ILogger<Processor> _logger { get; set; }
 
-        public Processor(DataContext context, ILogger<T> logger)
+        public Processor(DataContext context, ILogger<Processor> logger)
         {
             _context = context;
             _logger = logger;   

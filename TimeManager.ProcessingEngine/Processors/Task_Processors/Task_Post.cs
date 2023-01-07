@@ -4,14 +4,9 @@ using LanguageExt.Common;
 
 namespace TimeManager.ProcessingEngine.Processors
 {
-    public class Task_Post : Processor<ITask_Post>, ITask_Post
+    public class Task_Post : Processor, ITask_Post
     {
-        private DataContext _context;
-
-        public Task_Post(DataContext context)
-        {
-            _context = context;
-        }
+        public Task_Post(DataContext context, ILogger<Processor> logger) : base(context, logger) { }
 
         public Result<bool> Execute(string body)
         {
