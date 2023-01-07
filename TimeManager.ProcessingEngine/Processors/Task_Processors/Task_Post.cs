@@ -23,11 +23,13 @@ namespace TimeManager.ProcessingEngine.Processors
                 _context.TaskRecords.Add(taskRecord);
                 _context.SaveChanges();
 
+                _logger.LogInformation("Task successfully added");
                 return new Result<bool>(true);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.LogError(ex.Message);
+                _logger.LogError($"Stack Trace: {ex.StackTrace}");
                 return new Result<bool>(ex);
             }
         }

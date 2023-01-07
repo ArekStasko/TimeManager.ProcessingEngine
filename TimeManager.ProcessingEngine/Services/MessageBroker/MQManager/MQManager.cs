@@ -39,6 +39,9 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
                         "task_Post" => _processors.task_Post.Execute(convertedBody),
                         "task_Update" => _processors.task_Update.Execute(convertedBody),
                         "task_Delete" => _processors.task_Delete.Execute(convertedBody),
+                        "taskSet_Post" => _processors.taskSet_Post.Execute(convertedBody),
+                        "taskSet_Update" => _processors.taskSet_Update.Execute(convertedBody),
+                        "taskSet_Delete" => _processors.taskSet_Delete.Execute(convertedBody),
                         _ => new Result<bool>(new Exception("Unexisting Routing Key"))
                     };
 

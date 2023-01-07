@@ -18,10 +18,13 @@ namespace TimeManager.ProcessingEngine.Processors
                 _context.TaskRecords.Remove(taskRecord);
                 _context.SaveChanges();
 
+                _logger.LogInformation("Successfully removed Task Record");
                 return new Result<bool>(true);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
+                _logger.LogError($"Stack Trace: {ex.StackTrace}");
                 return new Result<bool>(ex);
             }
         }
