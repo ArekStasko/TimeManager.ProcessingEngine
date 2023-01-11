@@ -9,5 +9,6 @@ namespace TimeManager.ProcessingEngine.Data
         public int UserId { get; set; }
         public List<TaskDate> TaskOccurencies { get; set; }
         public TaskDTO Task { get; set; }
+        
     }
 }
