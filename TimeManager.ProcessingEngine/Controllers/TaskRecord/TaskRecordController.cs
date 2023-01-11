@@ -18,7 +18,7 @@ namespace TimeManager.ProcessingEngine.Controllers.TaskRecord
         [HttpPost(Name = "GetTaskRecords")]
         public async Task<IActionResult> GetTaskRecords(Request<int> request)
         {
-
+            
         }
     }
 }
