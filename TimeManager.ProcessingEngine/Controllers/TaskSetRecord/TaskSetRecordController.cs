@@ -18,7 +18,18 @@ namespace TimeManager.ProcessingEngine.Controllers.TaskSetRecord
         [HttpPost(Name = "GetTaskSetRecords")] 
         public async Task<IActionResult> GetTaskSetRecords(Request<int> request)
         {
+            var processor = _processors.taskSet_Get;
+            if (processor == null) throw new ArgumentNullException(nameof(processor));
 
+            var result = processor.Execute(request.Data);
+
+            return result.Match<IActionResult>(taskRecord =>
+            {
+                return CreatedAtAction(nameof(GetTaskSetRecords), taskRecord);
+            }, exception =>
+            {
+                return BadRequest(exception);
+            });
         }
     }
 }
