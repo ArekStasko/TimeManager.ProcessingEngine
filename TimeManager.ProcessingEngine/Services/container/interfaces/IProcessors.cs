@@ -17,5 +17,8 @@ namespace TimeManager.ProcessingEngine.Services.container
         public ITaskSet_CalculateData taskSet_CalculateData { get; }
         public ITaskSet_Get taskSet_Get { get; }
 
+        public IUser_Create user_Create { get; }
+        public IUser_GetStats user_GetStats { get; }
+
     }
 }

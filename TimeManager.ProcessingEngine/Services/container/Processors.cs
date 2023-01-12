@@ -21,5 +21,8 @@ namespace TimeManager.ProcessingEngine.Services.container
         public ITaskSet_Update taskSet_Update { get => _container.Resolve<ITaskSet_Update>(); }
         public ITaskSet_CalculateData taskSet_CalculateData { get => _container.Resolve<ITaskSet_CalculateData>(); }
         public ITaskSet_Get taskSet_Get { get => _container.Resolve<ITaskSet_Get>(); }
+
+        public IUser_Create user_Create { get => _container.Resolve<IUser_Create>(); }
+        public IUser_GetStats user_GetStats { get => _container.Resolve<IUser_GetStats>(); }
     }
 }
