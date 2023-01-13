@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using TimeManager.ProcessingEngine.Processors;
+using TimeManager.ProcessingEngine.Processors.TaskProcessors;
 using TimeManager.ProcessingEngine.Tests.Data;
 using Newtonsoft.Json;
 

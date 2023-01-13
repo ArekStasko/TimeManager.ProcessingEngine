@@ -2,7 +2,7 @@
 using TimeManager.ProcessingEngine.Data;
 using LanguageExt.Common;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
     public class Task_Update : Processor, ITask_Update
     {

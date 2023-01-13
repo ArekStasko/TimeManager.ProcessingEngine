@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 using LanguageExt.Common;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
     public class Task_Delete : Processor, ITask_Delete
     {

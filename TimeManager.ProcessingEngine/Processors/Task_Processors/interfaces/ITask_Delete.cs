@@ -1,6 +1,6 @@
 ﻿using LanguageExt.Common;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
     public interface ITask_Delete
     {

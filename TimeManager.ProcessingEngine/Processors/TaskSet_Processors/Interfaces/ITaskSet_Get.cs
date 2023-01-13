@@ -1,7 +1,7 @@
 ﻿using LanguageExt.Common;
 using TimeManager.ProcessingEngine.Data;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
 {
     public interface ITaskSet_Get
     {

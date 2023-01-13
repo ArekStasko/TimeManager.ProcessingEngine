@@ -1,6 +1,6 @@
 ﻿using LanguageExt.Common;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
 {
     public class TaskSet_CalculateData : ITaskSet_CalculateData
     {

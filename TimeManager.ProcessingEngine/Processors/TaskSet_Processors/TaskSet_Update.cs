@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
 {
     public class TaskSet_Update : Processor, ITaskSet_Update
     {
