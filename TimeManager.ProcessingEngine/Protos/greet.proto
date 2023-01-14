@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+option csharp_namespace = "TimeManager.ProcessingEngine.Protos";
+package greet;
+
+service Greeter {
+    rpc StreamTaskStats (TaskRequest) returns (stream TaskStats);
+}
+
+message TaskRequest {
+    int32 TaskRecordId = 1;
+}
+
+message TaskStats {
+        google.protobuf.Timestamp StartDate = 1;
+        google.protobuf.Timestamp EndDate = 2;
+        google.protobuf.Timestamp Deadline = 3;
+        int32 Priority = 4;
+        double Efficiency = 5;
+        google.protobuf.Duration ExecutionTime = 6;
+}

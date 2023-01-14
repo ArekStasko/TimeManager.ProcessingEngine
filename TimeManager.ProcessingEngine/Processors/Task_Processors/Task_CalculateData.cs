@@ -1,12 +1,42 @@
 ﻿using LanguageExt.Common;
+using TimeManager.ProcessingEngine.Data;
 
 namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
-    public class Task_CalculateData : ITask_CalculateData
+    public class Task_CalculateData : Processor, ITask_CalculateData
     {
-        public Result<bool> Execute(int taskSetRecordId)
+        public Task_CalculateData(DataContext context, ILogger<Processor> logger) : base(context, logger) { }
+
+        private double CalculateEfficiency(TimeSpan? delay, TimeSpan? executionTime, int Priority)
         {
-            throw new NotImplementedException();
+            TimeSpan delayValue = delay.Value;
+            double delayCount = delayValue.Hours * Priority + delayValue.Minutes * (Priority * 0.1) + delayValue.Seconds  * (Priority * 0.01);
+
+            TimeSpan executionValue = executionTime.Value;
+            double executionCount = executionValue.Hours * Priority + executionValue.Minutes * (Priority * 0.1) + executionValue.Seconds * (Priority * 0.01);
+
+            return (delayCount + executionCount / 100);
         }
+        public Result<ITaskRecord> Execute(int taskSetRecordId)
+        {
+            var taskRecord = _context.TaskRecords.FirstOrDefault(x => x.Id == taskSetRecordId);
+            if (taskRecord == null) return new Result<ITaskRecord>(new NullReferenceException());
+
+            if(taskRecord.EndDate != null)
+            {
+                taskRecord.ExecutionTime = taskRecord.EndDate - taskRecord.StartDate;
+
+                if(taskRecord.Deadline.CompareTo(taskRecord.EndDate) < 0)
+                {
+                    taskRecord.Delay = taskRecord.EndDate - taskRecord.Deadline;
+                }
+
+                taskRecord.Efficiency = CalculateEfficiency(taskRecord.Delay, taskRecord.ExecutionTime, taskRecord.Priority);
+                _context.SaveChanges();
+            }
+
+            return new Result<ITaskRecord>(taskRecord);
+        }
+
     }
 }

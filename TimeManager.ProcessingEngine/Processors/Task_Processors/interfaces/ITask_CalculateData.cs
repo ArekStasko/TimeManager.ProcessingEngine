@@ -5,6 +5,6 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
     public interface ITask_CalculateData
     {
-        public Result<bool> Execute(int taskRecordId);
+        public Result<ITaskRecord> Execute(int taskRecordId);
     }
 }
