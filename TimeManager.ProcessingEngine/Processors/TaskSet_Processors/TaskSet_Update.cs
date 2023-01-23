@@ -15,7 +15,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
                 var record = _context.TaskSetRecords.Single(tsk => tsk.Id == taskSetDTO.Id);
                 _context.TaskSetRecords.Remove(record);
 
-                TaskSetRecord taskSetRecord = new TaskSetRecord()
+                TaskSetRecords taskSetRecord = new TaskSetRecords()
                 {
                     Id = taskSetDTO.Id,
                     UserId = taskSetDTO.UserId,

@@ -14,7 +14,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
             {
                 TaskSetDTO taskSetDTO = JsonConvert.DeserializeObject<TaskSetDTO>(body);
 
-                TaskSetRecord taskSetRecord = new TaskSetRecord()
+                TaskSetRecords taskSetRecord = new TaskSetRecords()
                 {
                     Id = taskSetDTO.Id,
                     UserId = taskSetDTO.UserId,

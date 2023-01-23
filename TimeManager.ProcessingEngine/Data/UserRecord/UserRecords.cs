@@ -1,6 +1,6 @@
 ﻿namespace TimeManager.ProcessingEngine.Data
 {
-    public class UserRecord : IUserRecord
+    public class UserRecords : IUserRecords
     {
         public int Id { get; set; }
         public string UserName { get; set; }

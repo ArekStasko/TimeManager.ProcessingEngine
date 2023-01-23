@@ -3,7 +3,7 @@
 namespace TimeManager.ProcessingEngine.Data
 {
 
-    public interface ITaskRecord
+    public interface ITaskRecords
     {
         [Key]
         public int Id { get; set; }

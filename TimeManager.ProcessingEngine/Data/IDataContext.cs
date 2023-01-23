@@ -4,7 +4,8 @@ namespace TimeManager.ProcessingEngine.Data
 {
     public interface IDataContext
     {
-        public DbSet<TaskRecord> TaskRecords { get; set; }
-        public DbSet<UserSet> UserRecords { get; set; }
+        public DbSet<TaskRecords> TaskRecords { get; set; }
+        public DbSet<TaskSetRecords> TaskSetRecords { get; set; }
+        public DbSet<UserRecords> UserRecords { get; set; }
     }
 }

@@ -15,8 +15,8 @@ namespace TimeManager.ProcessingEngine.Data
             optionsBuilder.UseSqlServer(_connectionString);
         }
 
-        public virtual DbSet<TaskRecord> TaskRecords { get; set; }
-        public virtual DbSet<TaskSetRecord> TaskSetRecords { get; set; }
-        public DbSet<UserSet> UserRecords { get; set; }
+        public virtual DbSet<TaskRecords> TaskRecords { get; set; }
+        public virtual DbSet<TaskSetRecords> TaskSetRecords { get; set; }
+        public DbSet<UserRecords> UserRecords { get; set; }
     }
 }

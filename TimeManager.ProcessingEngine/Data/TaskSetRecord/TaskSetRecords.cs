@@ -2,7 +2,7 @@
 
 namespace TimeManager.ProcessingEngine.Data
 {
-    public class TaskSetRecord : ITaskSetRecord
+    public class TaskSetRecords : ITaskSetRecords
     {
         [Key]
         public int Id { get; set; }

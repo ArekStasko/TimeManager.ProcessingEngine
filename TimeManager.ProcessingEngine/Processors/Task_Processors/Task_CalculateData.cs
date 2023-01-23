@@ -17,10 +17,10 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 
             return (delayCount + executionCount / 100);
         }
-        public Result<ITaskRecord> Execute(int taskSetRecordId)
+        public Result<ITaskRecords> Execute(int taskSetRecordId)
         {
             var taskRecord = _context.TaskRecords.FirstOrDefault(x => x.Id == taskSetRecordId);
-            if (taskRecord == null) return new Result<ITaskRecord>(new NullReferenceException());
+            if (taskRecord == null) return new Result<ITaskRecords>(new NullReferenceException());
 
             if(taskRecord.EndDate != null)
             {
@@ -35,7 +35,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
                 _context.SaveChanges();
             }
 
-            return new Result<ITaskRecord>(taskRecord);
+            return new Result<ITaskRecords>(taskRecord);
         }
 
     }

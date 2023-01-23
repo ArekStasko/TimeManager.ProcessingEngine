@@ -14,7 +14,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
             {
                 TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
 
-                TaskRecord taskRecord = new TaskRecord()
+                TaskRecords taskRecord = new TaskRecords()
                 {
                     TaskId = taskDTO.Id,
                     UserId = taskDTO.UserId,

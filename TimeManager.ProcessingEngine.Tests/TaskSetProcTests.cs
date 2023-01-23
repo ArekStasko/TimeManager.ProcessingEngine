@@ -16,11 +16,11 @@ namespace TimeManager.ProcessingEngine.Tests
     [TestClass]
     public class TaskSetProcTests
     {
-        private Mock<DbSet<TaskSetRecord>> GetMockDbSet()
+        private Mock<DbSet<TaskSetRecords>> GetMockDbSet()
         {
-            var data = new List<TaskSetRecord>
+            var data = new List<TaskSetRecords>
             {
-               new TaskSetRecord
+               new TaskSetRecords
                {
                    Id = 1,
                    UserId = 1,
@@ -45,7 +45,7 @@ namespace TimeManager.ProcessingEngine.Tests
                      UserId = 1
                     }
                },
-               new TaskSetRecord
+               new TaskSetRecords
                {
                    Id = 2,
                    UserId = 2,
@@ -70,7 +70,7 @@ namespace TimeManager.ProcessingEngine.Tests
                      UserId = 2
                     }
                },
-               new TaskSetRecord
+               new TaskSetRecords
                {
                    Id = 3,
                    UserId = 3,
@@ -97,12 +97,12 @@ namespace TimeManager.ProcessingEngine.Tests
                }
             }.AsQueryable();
 
-            var mockSet = new Mock<DbSet<TaskSetRecord>>();
+            var mockSet = new Mock<DbSet<TaskSetRecords>>();
 
-            mockSet.As<IQueryable<TaskSetRecord>>().Setup(t => t.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<TaskSetRecord>>().Setup(t => t.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<TaskSetRecord>>().Setup(t => t.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<TaskSetRecord>>().Setup(t => t.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.As<IQueryable<TaskSetRecords>>().Setup(t => t.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<TaskSetRecords>>().Setup(t => t.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<TaskSetRecords>>().Setup(t => t.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<TaskSetRecords>>().Setup(t => t.GetEnumerator()).Returns(data.GetEnumerator());
 
             return mockSet;
         }
@@ -135,7 +135,7 @@ namespace TimeManager.ProcessingEngine.Tests
         [TestMethod]
         public void TaskSetPost_Should_PostTaskSetRecord()
         {
-            var mockSet = new Mock<DbSet<TaskSetRecord>>();
+            var mockSet = new Mock<DbSet<TaskSetRecords>>();
             var TaskSetRecordToPost = new TaskSetDTO
             {
                 Id = 1,
@@ -165,7 +165,7 @@ namespace TimeManager.ProcessingEngine.Tests
             _ = result.Match<bool>(succ =>
             {
                 Assert.IsTrue(succ);
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskSetRecord>()), Times.Once);
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskSetRecords>()), Times.Once);
                 mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>
@@ -192,7 +192,7 @@ namespace TimeManager.ProcessingEngine.Tests
             {
                 Assert.IsTrue(succ);
                 mockSet.Verify(tsk => tsk.Remove(TaskSetRecordToUpdate), Times.Once);
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskSetRecord>()), Times.Once);
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskSetRecords>()), Times.Once);
                 mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>

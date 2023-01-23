@@ -16,11 +16,11 @@ namespace TimeManager.ProcessingEngine.Tests
     [TestClass]
     public class TaskProcTests
     {
-        private Mock<DbSet<TaskRecord>> GetMockDbSet()
+        private Mock<DbSet<TaskRecords>> GetMockDbSet()
         {
-            var data = new List<TaskRecord>()
+            var data = new List<TaskRecords>()
             {
-                new TaskRecord
+                new TaskRecords
                 {
                     Id = 1,
                     TaskId = 1,
@@ -29,7 +29,7 @@ namespace TimeManager.ProcessingEngine.Tests
                     Priority = 4,
                     UserId = 1
                 },
-                new TaskRecord
+                new TaskRecords
                 {
                     Id = 2,
                     TaskId = 2,
@@ -38,7 +38,7 @@ namespace TimeManager.ProcessingEngine.Tests
                     Priority = 4,
                     UserId = 1
                 },
-                new TaskRecord
+                new TaskRecords
                 {
                     Id = 3,
                     TaskId = 3,
@@ -47,7 +47,7 @@ namespace TimeManager.ProcessingEngine.Tests
                     Priority = 4,
                     UserId = 1
                 },
-                new TaskRecord
+                new TaskRecords
                 {
                     Id = 4,
                     TaskId = 4,
@@ -56,7 +56,7 @@ namespace TimeManager.ProcessingEngine.Tests
                     Priority = 4,
                     UserId = 3
                 },
-                new TaskRecord
+                new TaskRecords
                 {
                     Id = 5,
                     TaskId = 5,
@@ -65,7 +65,7 @@ namespace TimeManager.ProcessingEngine.Tests
                     Priority = 4,
                     UserId = 2
                 },
-                new TaskRecord
+                new TaskRecords
                 {
                     Id = 6,
                     TaskId = 6,
@@ -76,12 +76,12 @@ namespace TimeManager.ProcessingEngine.Tests
                 }
             }.AsQueryable();
 
-            var mockSet = new Mock<DbSet<TaskRecord>>();
+            var mockSet = new Mock<DbSet<TaskRecords>>();
 
-            mockSet.As<IQueryable<TaskRecord>>().Setup(t => t.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<TaskRecord>>().Setup(t => t.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<TaskRecord>>().Setup(t => t.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<TaskRecord>>().Setup(t => t.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.As<IQueryable<TaskRecords>>().Setup(t => t.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<TaskRecords>>().Setup(t => t.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<TaskRecords>>().Setup(t => t.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<TaskRecords>>().Setup(t => t.GetEnumerator()).Returns(data.GetEnumerator());
 
             return mockSet;
         }
@@ -126,7 +126,7 @@ namespace TimeManager.ProcessingEngine.Tests
         [TestMethod]
         public void TaskPost_Should_PostTaskRecord()
         {
-            var mockSet = new Mock<DbSet<TaskRecord>>();
+            var mockSet = new Mock<DbSet<TaskRecords>>();
             var TaskRecordToPost = new TaskDTO
             {
                 Id = 1,
@@ -150,7 +150,7 @@ namespace TimeManager.ProcessingEngine.Tests
             _ = result.Match<bool>(succ =>
             {
                 Assert.IsTrue(succ);
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskRecord>()), Times.Once);
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskRecords>()), Times.Once);
                 mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>
@@ -177,7 +177,7 @@ namespace TimeManager.ProcessingEngine.Tests
             {
                 Assert.IsTrue(succ);
                 mockSet.Verify(tsk => tsk.Remove(TaskRecordToUpdate), Times.Once);
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskRecord>()), Times.Once);
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<TaskRecords>()), Times.Once);
                 mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>

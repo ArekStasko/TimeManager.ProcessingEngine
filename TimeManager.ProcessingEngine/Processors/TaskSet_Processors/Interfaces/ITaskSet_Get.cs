@@ -5,6 +5,6 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
 {
     public interface ITaskSet_Get
     {
-        public Result<ITaskSetRecord> Execute(int taskSetRecordId);
+        public Result<ITaskSetRecords> Execute(int taskSetRecordId);
     }
 }
