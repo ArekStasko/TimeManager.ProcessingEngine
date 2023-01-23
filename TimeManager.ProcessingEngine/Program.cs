@@ -32,17 +32,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
 
-//builder.Services.AddSingleton<DataContext>(s => new DataContext(builder.Configuration.GetConnectionString("DefaultConnection")));
-//builder.Services.AddSingleton<IProcessors, Processors>();
-//builder.Services.AddSingleton<IPooledObjectPolicy<IModel>, MQModelPooledObjectPolicy>();
+builder.Services.AddSingleton<DataContext>(s => new DataContext(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton<IProcessors, Processors>();
+builder.Services.AddSingleton<IPooledObjectPolicy<IModel>, MQModelPooledObjectPolicy>();
 
-//builder.Services.AddHostedService<MQManager>();
+builder.Services.AddHostedService<MQManager>();
 
 
 
 var app = builder.Build();
 
-//DatabaseManagerService.MigrationInitialization(app);
+DatabaseManagerService.MigrationInitialization(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -50,8 +50,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

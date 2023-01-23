@@ -13,6 +13,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
         private IConnection GetConnection()
         {
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            factory.Ssl.Enabled = false;
             return factory.CreateConnection();
         }
 
