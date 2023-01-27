@@ -1,8 +1,12 @@
-﻿namespace TimeManager.ProcessingEngine.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TimeManager.ProcessingEngine.Data
 {
     public class UserRecords : IUserRecords
     {
+        [Key]
         public int Id { get; set; }
+        public int UserId { get; set; }
         public string UserName { get; set; }
         public int SuccededTasks { get; set; } = 0;
         public int FailedTasks { get; set; } = 0;

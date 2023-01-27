@@ -24,7 +24,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
        public void Consume()
        {
             var channel = _objectPool.Get();
-            string[] queues = new string[] { "entity.task.post-queue", "entity.task.delete-queue", "entity.task.update-queue" };
+            string[] queues = new string[] { "entity.user.post-queue", "entity.task.post-queue", "entity.task.delete-queue", "entity.task.update-queue", "entity.taskSet.post-queue", "entity.taskSet.delete-queue", "entity.taskSet.update-queue" };
             var consumer = new EventingBasicConsumer(channel);
 
             foreach (var queue in queues) channel.BasicConsume(queue, false, consumer);
@@ -42,6 +42,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
                         "taskSet_Post" => _processors.taskSet_Post.Execute(convertedBody),
                         "taskSet_Update" => _processors.taskSet_Update.Execute(convertedBody),
                         "taskSet_Delete" => _processors.taskSet_Delete.Execute(convertedBody),
+                        "user_Post" => _processors.user_Create.Execute(convertedBody),
                         _ => new Result<bool>(new Exception("Unexisting Routing Key"))
                     };
 
