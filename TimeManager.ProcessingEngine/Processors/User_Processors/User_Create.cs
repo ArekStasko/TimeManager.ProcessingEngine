@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 using TimeManager.ProcessingEngine.Data.DTO;
 
-namespace TimeManager.ProcessingEngine.Processors
+namespace TimeManager.ProcessingEngine.Processors.UserProcessors
 {
     public class User_Create : Processor, IUser_Create
     {

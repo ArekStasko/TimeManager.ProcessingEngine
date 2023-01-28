@@ -1,7 +1,7 @@
 ﻿using TimeManager.ProcessingEngine.Processors;
 using TimeManager.ProcessingEngine.Processors.TaskProcessors;
 using TimeManager.ProcessingEngine.Processors.TaskSetProcessors;
-
+using TimeManager.ProcessingEngine.Processors.UserProcessors;
 
 
 namespace TimeManager.ProcessingEngine.Services.container

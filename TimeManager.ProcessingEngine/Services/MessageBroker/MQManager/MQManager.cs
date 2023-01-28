@@ -28,7 +28,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
             var consumer = new EventingBasicConsumer(channel);
 
             foreach (var queue in queues) channel.BasicConsume(queue, false, consumer);
-
+            
             consumer.Received += (model, ea) =>
             {
                 var jsonBody = JObject.Parse(Encoding.UTF8.GetString(ea.Body.ToArray()));
@@ -45,7 +45,7 @@ namespace TimeManager.ProcessingEngine.Services.MessageBroker
                         "user_Post" => _processors.user_Create.Execute(convertedBody),
                         _ => new Result<bool>(new Exception("Unexisting Routing Key"))
                     };
-
+                
                 var props = ea.BasicProperties;
                     var replyProps = channel.CreateBasicProperties();
                     replyProps.CorrelationId = props.CorrelationId;

@@ -11,6 +11,11 @@ namespace TimeManager.ProcessingEngine.Services.container
         {
             var container = new ContainerBuilder();
 
+            container.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .Where(t => t.Namespace == "TimeManager.ProcessingEngine.Processors.UserProcessors")
+                .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name))
+                .WithParameter(new TypedParameter(typeof(DataContext), _context))
+                .WithParameter(new TypedParameter(typeof(ILogger<Processor>), _logger));
 
             container.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(t => t.Namespace == "TimeManager.ProcessingEngine.Processors.TaskProcessors")
