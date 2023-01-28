@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LanguageExt;
+using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 using LanguageExt.Common;
 
@@ -21,6 +22,15 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
                     StartDate = taskDTO.DateAdded
                 };
                 _context.TaskRecords.Add(taskRecord);
+                Console.WriteLine($"FINDING USER WITH ID: {taskRecord.UserId}");
+
+                var userRecord = _context.UserRecords.Single(u => u.UserId == taskRecord.UserId);
+                Console.WriteLine("FOUND");
+
+                if (userRecord.IsNull()) return new Result<bool>(new ResultIsNullException("User ID is wrong"));
+                
+                userRecord.TaskCount++;
+                Console.WriteLine("ADDED");
                 _context.SaveChanges();
 
                 _logger.LogInformation("Task successfully added");

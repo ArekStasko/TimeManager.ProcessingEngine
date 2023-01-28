@@ -24,6 +24,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
                     StartDate = taskDTO.DateAdded
                 };
                 _context.TaskRecords.Add(taskRecord);
+                
                 _context.SaveChanges();
 
                 return new Result<bool>(true);
