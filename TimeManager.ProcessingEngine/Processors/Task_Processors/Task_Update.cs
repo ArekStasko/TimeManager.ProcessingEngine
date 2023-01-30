@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 using LanguageExt.Common;
-using TimeManager.ProcessingEngine.Services.Calculations;
 
 namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
@@ -16,7 +15,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
             try
             {
                 TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
-                var record = _context.TaskRecords.Single(act => act.TaskId == taskDTO.Id);
+                var record = _context.TaskRecords.Single(tsk => tsk.TaskId == taskDTO.Id);
                 Console.WriteLine("Updating");
                 record.StartDate = taskDTO.DateAdded;
                 record.Deadline = taskDTO.Deadline;
@@ -27,12 +26,10 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
                 {
                     record.EndDate = taskDTO.DateCompleted;
                     record.Completed = taskDTO.Completed;
-                    record.ExecutionTime = CalculateData.ExecutionTime(record);
-                    record.Delay = CalculateData.Delay(record);
-                    record.Efficiency = CalculateData.Efficiency(record.Efficiency, record.Delay, record.ExecutionTime, record.Priority);
+                    record.Efficiency = record.CalculateEfficiency();
                 }
 
-                Console.WriteLine($"RECORD : {record.Efficiency} - {record.Delay} - {record.ExecutionTime}");
+                Console.WriteLine($"RECORD : {record.Efficiency} - {record.Delay()} - {record.ExecutionTime()}");
                 Console.WriteLine("Updating");
 
                 _context.SaveChanges();

@@ -15,9 +15,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
             try
             {
                 TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
-                Console.WriteLine($"TASK DTO USER ID : {taskDTO.UserId}");
                 var taskRecord = _mapper.Map<TaskRecords>(taskDTO);
-                Console.WriteLine($"TASK USER ID : {taskRecord.UserId}");
                 
                 _context.TaskRecords.Add(taskRecord);
 

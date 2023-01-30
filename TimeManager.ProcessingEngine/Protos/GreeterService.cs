@@ -19,11 +19,7 @@ namespace TimeManager.ProcessingEngine.Protos
                 {
 
                     taskRecordStats.StartDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(taskRecord.StartDate);
-                    taskRecordStats.EndDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(taskRecord.EndDate);
-                    taskRecordStats.Deadline = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(taskRecord.Deadline);
                     taskRecordStats.Priority = taskRecord.Priority;
-                    taskRecordStats.Efficiency = taskRecord.Efficiency;
-                    taskRecordStats.ExecutionTime = Google.Protobuf.WellKnownTypes.Duration.FromTimeSpan(taskRecord.ExecutionTime);
 
                         return true;
                 }, exception =>

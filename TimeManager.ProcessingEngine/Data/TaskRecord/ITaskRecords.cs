@@ -10,12 +10,16 @@ namespace TimeManager.ProcessingEngine.Data
         int TaskId { get; set; }
         int UserId { get; set; }
         DateTime StartDate { get; set; }
-        DateTime EndDate { get; set; }
-        DateTime Deadline { get; set; }
+        DateTime? EndDate { get; set; }
+        DateTime? Deadline { get; set; }
         int Priority { get; set; }
-        double Efficiency { get; set; }
-        TimeSpan ExecutionTime { get; set; }
-        TimeSpan? Delay { get; set; }
+        double? Efficiency { get; set; }
         bool Completed { get; set; }
+        
+        public TimeSpan Delay();
+
+        public TimeSpan ExecutionTime();
+
+        public double CalculateEfficiency();
     }
 }

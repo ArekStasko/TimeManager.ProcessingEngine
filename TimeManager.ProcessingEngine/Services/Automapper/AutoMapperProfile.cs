@@ -14,8 +14,6 @@ public class AutomapperProfile : Profile
             .ForMember(x => x.StartDate, opt => opt.MapFrom(src => src.DateAdded))
             .ForMember(x => x.EndDate, opt => opt.MapFrom(src => src.DateCompleted))
             .ForMember(x => x.Efficiency, opt => opt.Ignore())
-            .ForMember(x => x.Delay, opt => opt.Ignore())
-            .ForMember(x => x.ExecutionTime, opt => opt.Ignore())
             .ForSourceMember(x => x.Name, opt => opt.DoNotValidate())
             .ForSourceMember(x => x.Type, opt => opt.DoNotValidate())
             .ForSourceMember(x => x.Description, opt => opt.DoNotValidate());
