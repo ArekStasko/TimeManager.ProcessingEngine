@@ -1,4 +1,5 @@
-﻿using LanguageExt.Common;
+﻿using AutoMapper;
+using LanguageExt.Common;
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 
@@ -6,14 +7,15 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
 {
     public class TaskSet_Post : Processor, ITaskSet_Post
     {
-        public TaskSet_Post(DataContext context, ILogger<Processor> logger) : base(context, logger) {}
+        public TaskSet_Post(DataContext context, ILogger<Processor> logger, IMapper mapper) : base(context, logger, mapper) {}
 
         public Result<bool> Execute(string body)
         {
             try
             {
                 TaskSetDTO taskSetDTO = JsonConvert.DeserializeObject<TaskSetDTO>(body);
-
+                var taskSetRecord = _mapper.Map<TaskSetRecords>(taskSetDTO);
+                /*
                 TaskSetRecords taskSetRecord = new TaskSetRecords()
                 {
                     Id = taskSetDTO.Id,
@@ -21,6 +23,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
                     TaskOccurencies = taskSetDTO.TaskOccurencies,
                     Task = taskSetDTO.Task,
                 };
+                */
                 _context.TaskSetRecords.Add(taskSetRecord);
                 _context.SaveChanges();
 

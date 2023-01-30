@@ -13,7 +13,8 @@ namespace TimeManager.ProcessingEngine.Data
         public DateTime Deadline { get; set; }
         public int Priority { get; set; } = 1;
         public double Efficiency { get; set; } = 100;
-        public TimeSpan ExecutionTime { get; set; }
+        public TimeSpan ExecutionTime { get; set; } = new TimeSpan(0,0,0);
         public TimeSpan? Delay { get; set; } = new TimeSpan(0,0,0);
+        public bool Completed { get; set; } = false;
     }
 }

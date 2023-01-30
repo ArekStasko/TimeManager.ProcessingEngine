@@ -1,14 +1,10 @@
-using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using Microsoft.Extensions.ObjectPool;
 using RabbitMQ.Client;
 using Serilog;
 using TimeManager.ProcessingEngine.Data;
-using TimeManager.ProcessingEngine.Data.Services;
-using TimeManager.ProcessingEngine.Services;
 using TimeManager.ProcessingEngine.Services.container;
 using TimeManager.ProcessingEngine.Services.MessageBroker;
-using Grpc;
-using Grpc.AspNetCore;
 using TimeManager.ProcessingEngine.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,13 +28,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<DataContext>(s => new DataContext(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSingleton<IProcessors, Processors>();
 builder.Services.AddSingleton<IPooledObjectPolicy<IModel>, MQModelPooledObjectPolicy>();
 
 builder.Services.AddHostedService<MQManager>();
-
-
 
 var app = builder.Build();
 

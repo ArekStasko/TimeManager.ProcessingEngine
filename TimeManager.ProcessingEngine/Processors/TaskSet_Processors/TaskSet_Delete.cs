@@ -1,4 +1,5 @@
-﻿using LanguageExt.Common;
+﻿using AutoMapper;
+using LanguageExt.Common;
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 
@@ -6,7 +7,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
 {
     public class TaskSet_Delete : Processor, ITaskSet_Delete
     {
-        public TaskSet_Delete(DataContext context, ILogger<Processor> logger) : base(context, logger) { }
+        public TaskSet_Delete(DataContext context, ILogger<Processor> logger, IMapper mapper) : base(context, logger, mapper) { }
 
         public Result<bool> Execute(string body)
         {

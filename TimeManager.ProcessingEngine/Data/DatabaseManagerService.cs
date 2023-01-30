@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using TimeManager.ProcessingEngine.Data;
+﻿using Microsoft.EntityFrameworkCore;
 
 /*
  
@@ -15,7 +13,7 @@ Microsoft.EntityFrameworkCore.SqlServer
 
 */
 
-namespace TimeManager.ProcessingEngine.Data.Services
+namespace TimeManager.ProcessingEngine.Data
 {
     public static class DatabaseManagerService
     {

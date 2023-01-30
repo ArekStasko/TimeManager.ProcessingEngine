@@ -6,15 +6,16 @@ namespace TimeManager.ProcessingEngine.Data
     public interface ITaskRecords
     {
         [Key]
-        public int Id { get; set; }
-        public int TaskId { get; set; }
-        public int UserId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public DateTime Deadline { get; set; }
-        public int Priority { get; set; }
-        public double Efficiency { get; set; }
-        public TimeSpan ExecutionTime { get; set; }
-        public TimeSpan? Delay { get; set; }
+        int Id { get; set; }
+        int TaskId { get; set; }
+        int UserId { get; set; }
+        DateTime StartDate { get; set; }
+        DateTime EndDate { get; set; }
+        DateTime Deadline { get; set; }
+        int Priority { get; set; }
+        double Efficiency { get; set; }
+        TimeSpan ExecutionTime { get; set; }
+        TimeSpan? Delay { get; set; }
+        bool Completed { get; set; }
     }
 }

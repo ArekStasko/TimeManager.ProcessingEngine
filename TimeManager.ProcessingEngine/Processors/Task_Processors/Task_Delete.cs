@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 using LanguageExt.Common;
@@ -7,7 +8,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
 {
     public class Task_Delete : Processor, ITask_Delete
     {
-        public Task_Delete(DataContext context, ILogger<Processor> logger) : base(context, logger) { }
+        public Task_Delete(DataContext context, ILogger<Processor> logger, IMapper mapper) : base(context, logger, mapper) { }
 
         public Result<bool> Execute(string body)
         {
