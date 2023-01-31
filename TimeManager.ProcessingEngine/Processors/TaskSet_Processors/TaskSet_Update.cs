@@ -21,7 +21,7 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
                     Id = taskSetDTO.Id,
                     UserId = taskSetDTO.UserId,
                     TaskOccurencies = taskSetDTO.TaskOccurencies,
-                    Task = taskSetDTO.Task,
+                    Task = _mapper.Map<TaskRecords>(taskSetDTO.Task)
                 };
                 _context.TaskSetRecords.Add(taskSetRecord);
                 _context.SaveChanges();

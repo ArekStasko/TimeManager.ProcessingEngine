@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using LanguageExt;
 
 namespace TimeManager.ProcessingEngine.Data
@@ -10,7 +11,7 @@ namespace TimeManager.ProcessingEngine.Data
         
         [Key]
         public int Id { get; set; }
-        public int TaskId { get; set; }
+        public Guid TaskId { get; set; }
         public int UserId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }

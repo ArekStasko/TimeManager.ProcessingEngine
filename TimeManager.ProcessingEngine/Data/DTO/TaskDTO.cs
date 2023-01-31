@@ -4,8 +4,7 @@ namespace TimeManager.ProcessingEngine.Data
 {
     public class TaskDTO
     {
-        [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int UserId { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime DateCompleted { get; set; }

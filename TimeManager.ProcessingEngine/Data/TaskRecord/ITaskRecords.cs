@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TimeManager.ProcessingEngine.Data
 {
@@ -7,7 +8,7 @@ namespace TimeManager.ProcessingEngine.Data
     {
         [Key]
         int Id { get; set; }
-        int TaskId { get; set; }
+        Guid TaskId { get; set; }
         int UserId { get; set; }
         DateTime StartDate { get; set; }
         DateTime? EndDate { get; set; }
