@@ -5,7 +5,7 @@ namespace TimeManager.ProcessingEngine.Data
     public class TaskDTO
     {
         public Guid Id { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime DateCompleted { get; set; }
         public DateTime Deadline { get; set; }

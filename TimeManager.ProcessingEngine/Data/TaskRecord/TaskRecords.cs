@@ -12,7 +12,7 @@ namespace TimeManager.ProcessingEngine.Data
         [Key]
         public int Id { get; set; }
         public Guid TaskId { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? Deadline { get; set; }
