@@ -13,15 +13,14 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
             try
             {
                 TaskSetDTO taskSetDTO = JsonConvert.DeserializeObject<TaskSetDTO>(body);
-                var record = _context.TaskSetRecords.Single(tsk => tsk.Id == taskSetDTO.Id);
+                var record = _context.TaskSetRecords.Single(tsk => tsk.TaskSetId == taskSetDTO.Id);
                 _context.TaskSetRecords.Remove(record);
 
                 TaskSetRecords taskSetRecord = new TaskSetRecords()
                 {
-                    Id = taskSetDTO.Id,
+                    TaskSetId = taskSetDTO.Id,
                     UserId = taskSetDTO.UserId,
-                    TaskOccurencies = taskSetDTO.TaskOccurencies,
-                    Task = _mapper.Map<TaskRecords>(taskSetDTO.Task)
+                    TaskOccurencies = taskSetDTO.TaskOccurencies
                 };
                 _context.TaskSetRecords.Add(taskSetRecord);
                 _context.SaveChanges();

@@ -4,10 +4,10 @@ namespace TimeManager.ProcessingEngine.Data
 {
     public class TaskSetDTO
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid TaskId { get; set; }
         public List<TaskDate> TaskOccurencies { get; set; }
-        public TaskDTO Task { get; set; }
     }
     public class TaskDate
     {

@@ -17,9 +17,10 @@ public class AutomapperProfile : Profile
             .ForSourceMember(x => x.Name, opt => opt.DoNotValidate())
             .ForSourceMember(x => x.Type, opt => opt.DoNotValidate())
             .ForSourceMember(x => x.Description, opt => opt.DoNotValidate());
-        
+
         CreateMap<TaskSetDTO, TaskSetRecords>()
-            .ForMember(x => x.Id, opt => opt.Ignore());
+            .ForMember(x => x.Id, opt => opt.Ignore())
+            .ForMember(x => x.TaskSetId, opt => opt.MapFrom(src => src.Id));
 
         CreateMap<UserDTO, UserRecords>()
             .ForMember(x => x.UserId, opt => opt.MapFrom(src => src.Id))

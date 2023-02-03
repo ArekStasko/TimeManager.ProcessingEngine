@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
@@ -17,6 +18,13 @@ namespace TimeManager.ProcessingEngine.Processors.TaskProcessors
                 TaskDTO taskDTO = JsonConvert.DeserializeObject<TaskDTO>(body);
                 var taskRecord = _context.TaskRecords.Single(tsk => tsk.TaskId == taskDTO.Id && tsk.UserId == taskDTO.UserId);
                 _context.TaskRecords.Remove(taskRecord);
+                
+                var userRecord = _context.UserRecords.Single(u => u.UserId == taskRecord.UserId);
+
+                if (userRecord.IsNull()) return new Result<bool>(new ResultIsNullException("User ID is wrong"));
+                
+                userRecord.TaskCount--;
+                
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully removed Task Record");

@@ -7,8 +7,9 @@ namespace TimeManager.ProcessingEngine.Data
     {
         [Key]
         int Id { get; set; } 
-        int UserId { get; set; }
+        Guid TaskSetId { get; set; }
+        Guid UserId { get; set; }
+        Guid TaskId { get; set; }
         List<TaskDate> TaskOccurencies { get; set; }
-        TaskRecords Task { get; set; }
     }
 }
