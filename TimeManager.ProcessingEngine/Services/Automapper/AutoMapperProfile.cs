@@ -20,7 +20,8 @@ public class AutomapperProfile : Profile
 
         CreateMap<TaskSetDTO, TaskSetRecords>()
             .ForMember(x => x.Id, opt => opt.Ignore())
-            .ForMember(x => x.TaskSetId, opt => opt.MapFrom(src => src.Id));
+            .ForMember(x => x.TaskSetId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(x => x.TaskId, opt => opt.MapFrom(src => src.TaskId));
 
         CreateMap<UserDTO, UserRecords>()
             .ForMember(x => x.UserId, opt => opt.MapFrom(src => src.Id))

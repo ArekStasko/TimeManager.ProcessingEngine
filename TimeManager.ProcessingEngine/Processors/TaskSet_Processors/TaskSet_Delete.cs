@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LanguageExt.Common;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TimeManager.ProcessingEngine.Data;
 
@@ -14,10 +15,10 @@ namespace TimeManager.ProcessingEngine.Processors.TaskSetProcessors
             try
             {
                 TaskSetDTO taskDTO = JsonConvert.DeserializeObject<TaskSetDTO>(body);
-                var taskRecord = _context.TaskSetRecords.Single(tsk => tsk.TaskSetId == taskDTO.Id);
+                var toDelete = _context.TaskSetRecords.OrderBy(e => e.Id).Include(e => e.TaskOccurencies);
+                var taskRecord = toDelete.Single(tsk => tsk.TaskSetId == taskDTO.Id);
                 _context.TaskSetRecords.Remove(taskRecord);
                 _context.SaveChanges();
-
                 _logger.LogInformation("Successfully removed TaskSet Record");
                 return new Result<bool>(true);
             }
