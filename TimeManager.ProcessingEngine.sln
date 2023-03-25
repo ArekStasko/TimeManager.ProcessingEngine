@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeManager.ProcessingEngine", "TimeManager.ProcessingEngine\TimeManager.ProcessingEngine.csproj", "{2AC9DE82-D77D-4065-96A9-DE15EB5312ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeManager.ProcessingEngine.Tests", "TimeManager.ProcessingEngine.Tests\TimeManager.ProcessingEngine.Tests.csproj", "{75330B48-88F5-4C3D-BE36-FCD721E77BFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeManager.ProcessingEngine.Tests", "TimeManager.ProcessingEngine.Tests\TimeManager.ProcessingEngine.Tests.csproj", "{777179A3-7F25-4551-8A15-CC0C252013E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{2AC9DE82-D77D-4065-96A9-DE15EB5312ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AC9DE82-D77D-4065-96A9-DE15EB5312ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AC9DE82-D77D-4065-96A9-DE15EB5312ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75330B48-88F5-4C3D-BE36-FCD721E77BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75330B48-88F5-4C3D-BE36-FCD721E77BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75330B48-88F5-4C3D-BE36-FCD721E77BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75330B48-88F5-4C3D-BE36-FCD721E77BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777179A3-7F25-4551-8A15-CC0C252013E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777179A3-7F25-4551-8A15-CC0C252013E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777179A3-7F25-4551-8A15-CC0C252013E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777179A3-7F25-4551-8A15-CC0C252013E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
