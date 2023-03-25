@@ -2,7 +2,7 @@
 
 namespace TimeManager.ProcessingEngine.Data
 {
-    public class DataContext : DbContext, IDataContext
+    public class DataContext : DbContext
     {
         private readonly string _connectionString;
 
